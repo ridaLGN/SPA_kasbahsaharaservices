@@ -1,0 +1,168 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-sand-50: #fbf7f0;
+  --color-sand-100: #f5ecdd;
+  --color-sand-200: #ecdcc2;
+  --color-sand-300: #dcc29c;
+  --color-sand-400: #c9a677;
+  --color-terracotta-400: #c8683a;
+  --color-terracotta-500: #b4552d;
+  --color-terracotta-600: #9a4524;
+  --color-desert-400: #e0a04f;
+  --color-desert-500: #d9893f;
+  --color-cocoa-500: #7a5034;
+  --color-cocoa-700: #5c3a21;
+  --color-cocoa-800: #45291a;
+  --color-cocoa-900: #2a1c12;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-dark: #128c4a;
+
+  --font-display: 'Cormorant Garamond', 'Noto Naskh Arabic', Georgia, serif;
+  --font-sans: 'Jost', 'Noto Naskh Arabic', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-arabic: 'Noto Naskh Arabic', 'Jost', system-ui, sans-serif;
+
+  --animate-rise: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+    background: var(--color-cocoa-900);
+  }
+  body {
+    @apply bg-sand-50 font-sans text-cocoa-800 antialiased;
+    font-weight: 400;
+    overflow-x: hidden;
+  }
+  /* Arabic: Naskh for everything, a bit larger and with more line height. */
+  html[lang='ar'] body,
+  html[lang='ar'] .font-display {
+    font-family: var(--font-arabic);
+    letter-spacing: 0 !important;
+  }
+  html[lang='ar'] body {
+    font-size: 1.0625rem;
+  }
+  html[lang='ar'] .tracking-eyebrow {
+    letter-spacing: 0;
+  }
+  ::selection {
+    background: var(--color-desert-400);
+    color: var(--color-cocoa-900);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-terracotta-500);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility tracking-eyebrow {
+  letter-spacing: 0.32em;
+}
+
+@utility btn {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-7 text-sm font-medium uppercase transition duration-300 active:scale-[0.98];
+  letter-spacing: 0.14em;
+}
+
+@layer components {
+  .eyebrow {
+    @apply tracking-eyebrow text-xs font-medium uppercase text-terracotta-500;
+  }
+  html[lang='ar'] :is(.btn-primary, .btn-ghost-light, .btn-outline, .btn-whatsapp) {
+    letter-spacing: 0;
+    @apply text-base normal-case;
+  }
+  .btn-primary {
+    @apply btn bg-terracotta-500 text-sand-50 shadow-lg shadow-cocoa-900/20 hover:bg-terracotta-600;
+  }
+  .btn-ghost-light {
+    @apply btn border border-sand-100/70 text-sand-50 backdrop-blur-sm hover:bg-sand-50 hover:text-cocoa-900;
+  }
+  .btn-outline {
+    @apply btn border border-cocoa-700/30 text-cocoa-800 hover:border-cocoa-700 hover:bg-cocoa-700 hover:text-sand-50;
+  }
+  .btn-whatsapp {
+    @apply btn bg-whatsapp-dark text-white hover:bg-[#0f7a40];
+  }
+
+  /* Riad arch frame for photographs */
+  .arch {
+    border-radius: 999px 999px 1.25rem 1.25rem;
+    overflow: hidden;
+  }
+
+  /* Thin double rule with a diamond, inspired by Amazigh motifs */
+  .ornament {
+    @apply flex items-center justify-center gap-3 text-sand-400;
+  }
+  .ornament::before,
+  .ornament::after {
+    content: '';
+    @apply h-px w-12 bg-current;
+  }
+
+  .pattern-bg {
+    background-color: var(--color-sand-100);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23c9a677' stroke-opacity='.22' stroke-width='1'%3E%3Cpath d='M28 4 52 28 28 52 4 28Z'/%3E%3Cpath d='M28 16 40 28 28 40 16 28Z'/%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .field-label {
+    @apply mb-2 block text-sm font-medium text-cocoa-700;
+  }
+  .field {
+    @apply block min-h-12 w-full rounded-xl border border-sand-300 bg-white px-4 py-3 text-base text-cocoa-900 shadow-sm transition placeholder:text-cocoa-500/50 focus:border-terracotta-500 focus:ring-2 focus:ring-terracotta-500/20 focus:outline-none;
+  }
+  .field[aria-invalid='true'] {
+    @apply border-red-700 ring-2 ring-red-700/15;
+  }
+  .field-error {
+    @apply mt-1.5 text-sm text-red-800;
+  }
+  /* iOS: keep native date/time pickers aligned with other fields */
+  input[type='date'].field,
+  input[type='time'].field {
+    -webkit-appearance: none;
+    appearance: none;
+    min-width: 0;
+    text-align: start;
+  }
+  input[type='date'].field::-webkit-date-and-time-value,
+  input[type='time'].field::-webkit-date-and-time-value {
+    text-align: start;
+  }
+
+  .choice {
+    @apply relative flex cursor-pointer items-center gap-3 rounded-xl border border-sand-300 bg-white px-4 py-3 transition hover:border-sand-400;
+  }
+  .choice:has(input:checked) {
+    @apply border-terracotta-500 bg-terracotta-500/5 ring-2 ring-terracotta-500/25;
+  }
+  .choice:has(input:focus-visible) {
+    @apply outline-2 outline-offset-2 outline-terracotta-500;
+  }
+}

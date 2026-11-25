@@ -1,0 +1,9 @@
+{
+  "name": "Kasbah Sahara Services – Spa",
+  "short_name": "Kasbah Spa",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fbf7f0",
+  "theme_color": "#2a1c12",
+  "icons": [{ "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }]
+}
