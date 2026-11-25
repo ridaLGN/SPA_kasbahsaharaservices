@@ -88,6 +88,7 @@ export const ar: Dict = {
   'contact.title': 'تواصلوا مع القصبة',
   'contact.intro': 'لأي سؤال، اتصلوا بنا أو راسلونا عبر واتساب. يمكنكم أيضاً التوجّه إلى الاستقبال.',
   'contact.role.reception': 'استقبال الفندق',
+  'contact.role.spa': 'حجوزات السبا والاستفسارات (واتساب)',
   'contact.role.manager': 'اتصال مباشر',
   'contact.call': 'اتصال',
   'contact.whatsapp': 'واتساب',
@@ -96,4 +97,5 @@ export const ar: Dict = {
 
   'footer.rights': 'جميع الحقوق محفوظة.',
   'footer.photos': 'صور التدليك: Unsplash.',
+  'footer.credit': 'تصميم وتطوير الموقع:',
 }

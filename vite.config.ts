@@ -22,8 +22,7 @@ function seo(publicUrl: string | undefined): Plugin {
     url: base ?? site.website,
     image: abs('/images/og-image.jpg'),
     logo: abs('/brand/logo-brown.png'),
-    email: site.email,
-    telephone: `+${site.contacts[0].phone}`,
+    telephone: `+${site.bookingWhatsApp}`,
     priceRange: `${Math.min(...prices)}–${Math.max(...prices)} EUR`,
     address: {
       '@type': 'PostalAddress',

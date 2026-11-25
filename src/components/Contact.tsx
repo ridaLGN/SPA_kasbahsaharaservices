@@ -1,4 +1,4 @@
-import { Globe, Mail, MapPin, Phone } from 'lucide-react'
+import { Globe, MapPin, Phone } from 'lucide-react'
 import { useI18n } from '../i18n'
 import { site } from '../config/site'
 import { whatsappUrl } from '../lib/booking'
@@ -29,7 +29,7 @@ export function Contact() {
               <p className="mt-3 font-medium text-cocoa-800" dir="ltr">
                 {c.phoneDisplay}
               </p>
-              <div className="mt-5 grid grid-cols-2 gap-2">
+              <div className={`mt-auto grid gap-2 pt-5 ${c.whatsapp ? 'grid-cols-2' : 'grid-cols-1'}`}>
                 <a href={`tel:+${c.phone}`} className="btn-outline px-3" data-testid={`call-${c.id}`}>
                   <Phone className="h-4 w-4" aria-hidden="true" />
                   {t('contact.call')}
@@ -52,10 +52,6 @@ export function Contact() {
         </ul>
 
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a href={`mailto:${site.email}`} className="btn-outline normal-case" data-testid="email-link">
-            <Mail className="h-4 w-4" aria-hidden="true" />
-            <span className="tracking-normal">{site.email}</span>
-          </a>
           <a href={site.website} target="_blank" rel="noopener" className="btn-outline" data-testid="website-link">
             <Globe className="h-4 w-4" aria-hidden="true" />
             {t('contact.website')}
@@ -77,6 +73,18 @@ export function Footer() {
       </p>
       <p className="mt-6 text-xs text-sand-400">
         © {new Date().getFullYear()} {site.name}. {t('footer.rights')} {t('footer.photos')}
+      </p>
+      <p className="mt-4 text-xs text-sand-400">
+        {t('footer.credit')}{' '}
+        <a
+          href={site.developer.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-testid="developer-link"
+          className="font-medium text-sand-200 underline decoration-sand-400/50 underline-offset-4 transition hover:text-desert-400"
+        >
+          {site.developer.name}
+        </a>
       </p>
     </footer>
   )

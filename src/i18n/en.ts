@@ -87,6 +87,7 @@ export const en = {
   'contact.title': 'Contact the Kasbah',
   'contact.intro': 'For any question, call us or write to us on WhatsApp. You can also ask at reception.',
   'contact.role.reception': 'Hotel reception',
+  'contact.role.spa': 'Spa bookings & questions (WhatsApp)',
   'contact.role.manager': 'Direct contact',
   'contact.call': 'Call',
   'contact.whatsapp': 'WhatsApp',
@@ -95,6 +96,7 @@ export const en = {
 
   'footer.rights': 'All rights reserved.',
   'footer.photos': 'Massage photos: Unsplash.',
+  'footer.credit': 'Website designed & developed by',
 }
 
 export type Dict = Record<keyof typeof en, string>

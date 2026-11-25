@@ -88,6 +88,7 @@ export const fr: Dict = {
   'contact.title': 'Contacter la Kasbah',
   'contact.intro': 'Pour toute question, appelez-nous ou écrivez-nous sur WhatsApp. Vous pouvez aussi vous adresser à la réception.',
   'contact.role.reception': 'Réception de l’hôtel',
+  'contact.role.spa': 'Réservations spa & questions (WhatsApp)',
   'contact.role.manager': 'Contact direct',
   'contact.call': 'Appeler',
   'contact.whatsapp': 'WhatsApp',
@@ -96,4 +97,5 @@ export const fr: Dict = {
 
   'footer.rights': 'Tous droits réservés.',
   'footer.photos': 'Photos de massage : Unsplash.',
+  'footer.credit': 'Site conçu et développé par',
 }

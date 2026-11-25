@@ -1,6 +1,6 @@
 import { expect, test, type Page } from '@playwright/test'
 
-const HOTEL_WA = '212661776766'
+const SPA_WA = '212620202610'
 
 /** Date at the hotel (Africa/Casablanca) + n days, as YYYY-MM-DD. */
 function hotelDate(offsetDays: number) {
@@ -116,7 +116,7 @@ test.describe('Kasbah Sahara – spa page', () => {
     const urls = await opened(page)
     expect(urls).toHaveLength(1)
     const url = new URL(urls[0])
-    expect(url.origin + url.pathname).toBe(`https://wa.me/${HOTEL_WA}`)
+    expect(url.origin + url.pathname).toBe(`https://wa.me/${SPA_WA}`)
     const text = url.searchParams.get('text')!
     for (const part of [
       'Jane Doe',
@@ -191,16 +191,20 @@ test.describe('Kasbah Sahara – spa page', () => {
     await page.goto('/')
     const fab = page.getByTestId('whatsapp-fab')
     await expect(fab).toBeVisible()
-    await expect(fab).toHaveAttribute('href', new RegExp(`^https://wa\\.me/${HOTEL_WA}\\?text=`))
+    await expect(fab).toHaveAttribute('href', new RegExp(`^https://wa\\.me/${SPA_WA}\\?text=`))
     await page.locator('#contact').scrollIntoViewIfNeeded()
     await expect(fab).toBeInViewport()
 
     await expect(page.getByTestId('call-hotel')).toHaveAttribute('href', 'tel:+212661776766')
     await expect(page.getByTestId('call-redouan')).toHaveAttribute('href', 'tel:+212620202610')
     await expect(page.getByTestId('call-isabelle')).toHaveAttribute('href', 'tel:+33625027415')
-    await expect(page.getByTestId('wa-redouan')).toHaveAttribute('href', /^https:\/\/wa\.me\/212620202610\?text=/)
-    await expect(page.getByTestId('wa-isabelle')).toHaveAttribute('href', /^https:\/\/wa\.me\/33625027415\?text=/)
-    await expect(page.getByTestId('email-link')).toHaveAttribute('href', 'mailto:contact@kasbahsaharaservices.com')
+    // Every WhatsApp button on the page goes to the spa number, and no e-mail link is offered
+    const waLinks = await page.locator('a[href^="https://wa.me/"]').evaluateAll((as) => as.map((a) => a.getAttribute('href')))
+    expect(waLinks.length).toBeGreaterThanOrEqual(2)
+    for (const href of waLinks) expect(href!.startsWith(`https://wa.me/${SPA_WA}?text=`), href!).toBe(true)
+    await expect(page.locator('a[href^="mailto:"]')).toHaveCount(0)
+    await expect(page.getByTestId('developer-link')).toHaveText('Rida Lagnaoui')
+    await expect(page.getByTestId('developer-link')).toHaveAttribute('href', 'https://www.linkedin.com/in/lagnaouirida')
     await expect(page.getByTestId('website-link')).toHaveAttribute('href', 'https://kasbahsaharaservices.com/')
   })
 
